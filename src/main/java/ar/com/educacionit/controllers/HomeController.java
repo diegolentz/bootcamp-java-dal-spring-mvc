@@ -15,7 +15,15 @@ public class HomeController {
 	}
 	
 	public String alert() {
-		return "";
+		return "bla";
+	}
+	
+	public void metodo2() {
+		
+	}
+	
+	public void metodo3() {
+		
 	}
 	
 }	
