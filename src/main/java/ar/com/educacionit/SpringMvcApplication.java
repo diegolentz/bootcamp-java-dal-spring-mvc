@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringMvcApplication {
 
 	public static void main(String[] args) {
+		
+		System.out.println("tuki");
 		SpringApplication.run(SpringMvcApplication.class, args);
 	}
 
