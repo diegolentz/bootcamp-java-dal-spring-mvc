@@ -15,7 +15,7 @@ public class HomeController {
 	}
 	
 	public String alert() {
-		return "-algo";
+		return "bla";
 	}
 	
 }	
