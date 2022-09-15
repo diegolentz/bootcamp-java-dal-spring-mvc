@@ -18,4 +18,12 @@ public class HomeController {
 		return "bla";
 	}
 	
+	public void metodo2() {
+		
+	}
+	
+	public void metodo3() {
+		
+	}
+	
 }	
