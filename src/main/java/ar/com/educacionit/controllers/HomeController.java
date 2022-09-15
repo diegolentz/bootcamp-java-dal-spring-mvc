@@ -13,8 +13,4 @@ public class HomeController {
 		//quiero ir  a la pagina home.html
 		return "home";
 	}
-	
-	public String alert() {
-		return "";
-	}
 }	
