@@ -33,8 +33,4 @@ public class SociosService {
 			return null;
 		}
 	}
-
-	public void crear(Socios socio) {
-		this.repository.save(socio);
-	}
 }

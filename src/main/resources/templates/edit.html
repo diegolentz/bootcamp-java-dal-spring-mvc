@@ -1,0 +1,76 @@
+
+<!-- listar los cupones del sitio -->
+<!--namespaces-->
+<!DOCTYPE html>
+<html lang="es" 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaft.org">
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!--incluir css-->
+	<link rel="stylesheet" 
+		type="text/css" 
+		media="all"
+		th:href="@{/css/site.css}" />
+</head>
+
+<body>
+	<main>
+		<section class="container">
+			<h1>Socios</h1>
+			<form class="row g-3 needs-validation" 
+				novalidate
+				th:object="${SOCIO}"
+				action="#"
+				th:action="@{/socio/edit}"
+				th:method="POST"
+				>
+			  <div class="col-md-4">
+			    <label for="validationCustom01" 
+			    	class="form-label">Nombre</label>
+			    <input type="text" 
+			    	class="form-control" 
+			    	id="validationCustom01" 
+			    	value="Mark" 
+			    	required
+			    	th:field="*{nombre}">
+			    <div class="valid-feedback">
+			      Looks good!
+			    </div>
+			  </div>
+			  <div class="col-md-4">
+			    <label for="validationCustom02" 
+			    	class="form-label">Apellido</label>
+			    <input type="text" 
+			    	class="form-control" 
+			    	id="validationCustom02" 
+			    	value="Otto"
+			    	th:field="*{apellido}" 
+			    	required>
+			    <div class="valid-feedback">
+			      Looks good!
+			    </div>
+			  </div>
+			  <div class="col-md-4">
+			    <label for="validationCustom02" 
+			    	class="form-label">C&oacute;digo</label>
+			    <input type="text" 
+			    	class="form-control" 
+			    	id="validationCustom02" 
+			    	value="1234"
+			    	th:field="*{codigo}" 
+			    	required>
+			    <div class="valid-feedback">
+			      Looks good!
+			    </div>
+			  </div>
+			  <div class="col-12">
+			    <button class="btn btn-primary" type="submit">Enviar</button>
+			  </div>
+			</form>
+		</section>
+	</main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
