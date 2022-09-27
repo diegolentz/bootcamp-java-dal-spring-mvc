@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="cupon")
+@Table(name="cupones")
 public class Cupon {
 
 	@Id
@@ -49,7 +49,7 @@ public class Cupon {
 		return id;
 	}
 
-	public void setId(Long id) { 
+	public void setId(Long id) {
 		this.id = id;
 	}
 

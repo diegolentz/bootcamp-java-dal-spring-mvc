@@ -1,11 +1,12 @@
 
-package ar.com.educacionit.domain;
+package ar.com.educacionit.enums;
 
 public enum CuponViewsEnum {
 
 	LIST("/cupon/list"),
 	EDIT("/cupon/edit"),
-	NEW("/cupon/new")
+	NEW("/cupon/new"),
+	LIST_REDIRECT("redirect:/cupon/list"),
 	;
 	
 	private String view;

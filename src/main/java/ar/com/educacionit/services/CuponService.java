@@ -33,4 +33,8 @@ public class CuponService {
 			return null;
 		}
 	}
+	
+	public Cupon crear(Cupon cupon) {
+		return this.repository.save(cupon);
+	}
 }

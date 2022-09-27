@@ -13,24 +13,25 @@
 		type="text/css" 
 		media="all"
 		th:href="@{/css/site.css}" />
-	<style>
-		.deleteLink {
-			text-decoration: underline;	
-			cursor:pointer;
-		}
-	</style>
 	<script>
 		guardarId = (id) => {
-			//capturo el hidden por si id y actualizo su valor
-			document.getElementById('idSocio').value=id;
+			document.getElementById('idcupon').value=id;
 		}
 	</script>
 </head>
 
 <body>
+	<div th:insert="navbar.html"></div>
 	<main>
-		<section class="container-fluid">
-			<h1>Socios</h1>
+		<section class="container">			
+			<div class="row">
+				<div class="col-12">
+					<h1>Cupones</h1>
+					<a th:href="@{/cupon/new}"
+						class="btn btn-primary">Nuevo
+					</a>
+				</div>
+			</div>
 			<table class="table">
 				<!--titulos de la tabla-->
 				<tr>	
@@ -43,20 +44,20 @@
 					<th></th>			
 				</tr>
 				<!-- rows -->		
-				<tr th:each="socio : ${CUPONES}">
-					<td th:text="${socio.id}"></td>
-					<td th:text="${socio.nombre}"></td>
-					<td th:text="${socio.codigo}"></td>
-					<td th:text="${socio.fechaVigenciaDesde}"></td>
-					<td th:text="${socio.fechaVigenciaHasta}"></td>
-					<td th:text="${socio.descuento}"></td>
+				<tr th:each="cupon : ${CUPONES}">
+					<td th:text="${cupon.id}"></td>
+					<td th:text="${cupon.nombre}"></td>
+					<td th:text="${cupon.codigo}"></td>
+					<td th:text="${cupon.fechaVigenciaDesde}"></td>
+					<td th:text="${cupon.fechaVigenciaHasta}"></td>
+					<td th:text="${cupon.descuento}"></td>
 					<td>
 						<a class="btn btn-primary"
-							th:href="@{'/socio/edit/' + ${socio.id}}">Edit</a>
+							th:href="@{'/cupon/edit/' + ${cupon.id}}">Edit</a>
 						<a class="btn btn-danger"
 							data-bs-toggle="modal"
 							data-bs-target="#exampleModal"
-							th:attr="onclick='guardarId(' + ${socio.id} +')'">Eliminar</a>
+							th:attr="onclick='guardarId(' + ${cupon.id} +')'">Eliminar</a>
 							<!-- Button trigger modal -->
 <!--						<button type="button" 
 								class="btn btn-danger" 
@@ -75,7 +76,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" 
-	        	id="exampleModalLabel">Modal title</h5>
+	        	id="exampleModalLabel">Eliminar Cupón</h5>
 	        <button type="button" 
 	        	class="btn-close" 
 	        	data-bs-dismiss="modal" 
@@ -88,8 +89,8 @@
 		      <form id="frmDelete"
 		      		action="#"
 		      		th:method="GET"
-		      		th:action="@{/socio/delete}">
-		      	<input type="hidden" id="idSocio" name="idSocio">
+		      		th:action="@{/cupon/delete}">
+		      	<input type="hidden" id="idcupon" name="id">
 		        <button type="button" 
 		        	class="btn btn-secondary" 
 		        	data-bs-dismiss="modal">Cancelar</button>
