@@ -19,7 +19,8 @@
 	<main>
 		<section class="container">
 			<h1>Socios</h1>
-			<form class="row g-3 needs-validation" 
+			<form 
+				th:class="${#fields.hasErrors()} ? 'row g-3 needs-validation was-validated' : 'row needs-validation g-3'"
 				novalidate
 				th:object="${SOCIO}"
 				action="#"
@@ -38,6 +39,9 @@
 			    <div class="valid-feedback">
 			      Looks good!
 			    </div>
+			    <div th:if="${#fields.hasErrors('nombre')}"
+			    	th:errors="*{nombre}"
+			    	class="invalid-feedback"></div>
 			  </div>
 			  <div class="col-md-4">
 			    <label for="validationCustom02" 
@@ -51,6 +55,9 @@
 			    <div class="valid-feedback">
 			      Looks good!
 			    </div>
+			    <div th:if="${#fields.hasErrors('apellido')}"
+			    	th:errors="*{apellido}"
+			    	class="invalid-feedback"></div>
 			  </div>
 			  <div class="col-md-4">
 			    <label for="validationCustom02" 
@@ -60,10 +67,14 @@
 			    	id="validationCustom02" 
 			    	value="1234"
 			    	th:field="*{codigo}" 
-			    	required>
+			    	required
+			    	readonly>
 			    <div class="valid-feedback">
 			      Looks good!
 			    </div>
+			    <div th:if="${#fields.hasErrors('codigo')}"
+			    	th:errors="*{codigo}"
+			    	class="invalid-feedback"></div>
 			  </div>
 			  <div class="col-12">
 			    <button class="btn btn-primary" type="submit">Enviar</button>
