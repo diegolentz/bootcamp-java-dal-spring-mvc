@@ -3,12 +3,17 @@ package ar.com.educacionit.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,9 +31,11 @@ public class SociosController {
 	//http://localhost:8081/socio/all
 	@GetMapping("/all")
 	public String all(Model model) {
+//		if(true) throw new DuplicateKeyException("error",new Exception("probando cosas"));
+
 		List<Socios> socios = this.sociosService.buscarTodos();
 		model.addAttribute("socios", socios);
-		return "socios";
+		return "/socio/socios";
 	}
 	
 	@GetMapping("/delete") 
@@ -54,4 +61,25 @@ public class SociosController {
 		return "edit";
 	}
 	
+	@PostMapping("/edit")
+	public String editar(
+			@Valid @ModelAttribute(name="SOCIO") Socios socio,
+			BindingResult result,
+			Model modelAndView) {
+		
+		//evaluar las validaciones
+		
+		//ModelAndView modelAndView  = new ModelAndView("edit");
+		
+		if(result.hasErrors()) {
+			modelAndView.addAttribute("SOCIO", socio);
+			return "edit";
+		}
+		
+		
+		//modelAndView.addObject("SOCIO", socio);
+		
+		//return modelAndView;
+		return "edit";
+	}
 }

@@ -4,14 +4,15 @@ package ar.com.educacionit.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+@RequestMapping("/logout")
+public class LogoutController {
 
-	//GET > http://localhost:8080/
-	@GetMapping(value = {"/","/home"})
-	public String home(Model model) {
-		//quiero ir  a la pagina home.html
+	@GetMapping()
+	public String list(Model model) {
+		
 		return "home";
 	}
 }

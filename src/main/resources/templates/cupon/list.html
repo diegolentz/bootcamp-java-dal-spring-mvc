@@ -1,0 +1,106 @@
+
+<!-- listar los cupones del sitio -->
+<!--namespaces-->
+<!DOCTYPE html>
+<html lang="es" 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaft.org">
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!--incluir css-->
+	<link rel="stylesheet" 
+		type="text/css" 
+		media="all"
+		th:href="@{/css/site.css}" />
+	<script>
+		guardarId = (id) => {
+			document.getElementById('idcupon').value=id;
+		}
+	</script>
+</head>
+
+<body>
+	<div th:insert="navbar.html"></div>
+	<main>
+		<section class="container">			
+			<div class="row">
+				<div class="col-12">
+					<h1>Cupones</h1>
+					<a th:href="@{/cupon/new}"
+						class="btn btn-primary">Nuevo
+					</a>
+				</div>
+			</div>
+			<table class="table">
+				<!--titulos de la tabla-->
+				<tr>	
+					<th>ID</th>		
+					<th>NOMBRE</th>
+					<th>CODIGO</th>
+					<th>FECHA V.D</th>
+					<th>FECHA V.H</th>
+					<th>DESCUENTO</th>
+					<th></th>			
+				</tr>
+				<!-- rows -->		
+				<tr th:each="cupon : ${CUPONES}">
+					<td th:text="${cupon.id}"></td>
+					<td th:text="${cupon.nombre}"></td>
+					<td th:text="${cupon.codigo}"></td>
+					<td th:text="${cupon.fechaVigenciaDesde}"></td>
+					<td th:text="${cupon.fechaVigenciaHasta}"></td>
+					<td th:text="${cupon.descuento}"></td>
+					<td>
+						<a class="btn btn-primary"
+							th:href="@{'/cupon/edit/' + ${cupon.id}}">Edit</a>
+						<a class="btn btn-danger"
+							data-bs-toggle="modal"
+							data-bs-target="#exampleModal"
+							th:attr="onclick='guardarId(' + ${cupon.id} +')'">Eliminar</a>
+							<!-- Button trigger modal -->
+<!--						<button type="button" 
+								class="btn btn-danger" 
+								data-bs-toggle="modal" 
+								data-bs-target="#exampleModal">-->
+<!--						  Eliminar-->
+						</button>		
+					</td>			
+				</tr>
+			</table>
+		</section>
+	</main>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" 
+	        	id="exampleModalLabel">Eliminar Cupón</h5>
+	        <button type="button" 
+	        	class="btn-close" 
+	        	data-bs-dismiss="modal" 
+	        	aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        ¿Esta seguro?
+	      </div>
+	      <div class="modal-footer">
+		      <form id="frmDelete"
+		      		action="#"
+		      		th:method="GET"
+		      		th:action="@{/cupon/delete}">
+		      	<input type="hidden" id="idcupon" name="id">
+		        <button type="button" 
+		        	class="btn btn-secondary" 
+		        	data-bs-dismiss="modal">Cancelar</button>
+		        <button type="submit" 
+		        	class="btn btn-primary">Aceptar</button>
+		      </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
