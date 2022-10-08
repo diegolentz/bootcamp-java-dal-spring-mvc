@@ -20,10 +20,14 @@
 					<h1>Users</h1>					
 				</div>
 			</div>
+			<div th:if="${message}" class="alert alert-danger">
+					<p th:text="${message}"></p>	
+			</div>
 			<form 
 				th:class="${#fields.hasErrors()} ? 'row g-3 needs-validation was-validated' : 'row needs-validation g-3'"
 				novalidate
 				th:object="${USER}"
+				
 				action="#"
 				th:action="@{/user/new}"
 				th:method="POST"
@@ -67,24 +71,23 @@
 			  </div>
 			
 			  <!-- CATEGORIA-->
+			  
 			  <div class="col-md-4">
 			    <label for="categoria" 
 			    	class="form-label">
 			    	Categoria
 			    </label>
 			    <!--thymelaft select-->
-			    <select>
-			    	<option value="1">ADMINISTRADOR</option>
-			    	<option value="2">NORMAL</option>
+			    
+			    <select  class="form-select"
+			    		th:field="*{category}">
+			    	<option th:each="categoria : ${CATEGORIES}" 
+			    			th:value="${categoria.id}"
+			    			>
+			    			<span th:text="${categoria.category}"></span>
+			    	 </option>
 			    </select>
-			    <div class="valid-feedback">
-			      Looks good!
-			    </div>
-			    <div th:if="${#fields.hasErrors('category.id')}"
-			    	th:errors="*{category.id}"
-			    	class="invalid-feedback"></div>
-			  </div>
-							  
+			  </div>			  
 			  <div class="col-12">
 			    <button class="btn btn-primary" type="submit">
 			    	Enviar

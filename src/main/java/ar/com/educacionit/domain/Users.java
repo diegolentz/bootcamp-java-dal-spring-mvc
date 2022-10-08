@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -23,10 +24,12 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "password", length = 100)
+	@NotEmpty
+	@Column(name = "password", length = 100, nullable=false)
 	private String password;
 	
-	@Column(name = "username", length = 100)
+	@NotEmpty
+	@Column(name = "username", length = 100, nullable=false, unique=true)
 	private String username;
 
 	//roles del usuario

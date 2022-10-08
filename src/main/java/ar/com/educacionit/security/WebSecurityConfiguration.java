@@ -30,7 +30,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.
 	        authorizeRequests()
-	        .antMatchers("/").permitAll()
+	        //.antMatchers("/").permitAll() /*Solo accede si el usuario esta loggeado*/
 	        .antMatchers("/login").permitAll()
 	        .anyRequest().authenticated().and().csrf().disable().formLogin()
 	        .loginPage("/login").failureUrl("/login?error=true")

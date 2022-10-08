@@ -30,7 +30,7 @@ public class MyUserService implements UserDetailsService {
 		
 		Set<GrantedAuthority> auths = users.getRoles()
 			.stream()
-			.map(r -> new SimpleGrantedAuthority(r.getRole()))
+			.map(r -> new SimpleGrantedAuthority("ROLE_"+r.getRole()))
 			.collect(Collectors.toSet());
 			
 		//UserDetail
