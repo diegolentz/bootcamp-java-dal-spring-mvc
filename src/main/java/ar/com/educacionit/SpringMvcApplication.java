@@ -1,4 +1,3 @@
-
 package ar.com.educacionit;
 
 import org.springframework.boot.SpringApplication;
@@ -11,5 +10,4 @@ public class SpringMvcApplication {
 		System.out.println("");
 		SpringApplication.run(SpringMvcApplication.class, args);
 	}
-
 }
