@@ -68,4 +68,16 @@ public class Users {
 		return username;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setRoles(Set<Roles> roles) {
+		this.roles = roles;
+	}
+
+	public void setCategory(UsersCategory category) {
+		this.category = category;
+	}
+
 }

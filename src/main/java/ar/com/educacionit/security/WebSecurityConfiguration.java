@@ -19,34 +19,30 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	MyUserService myUserService;
 	
-//	@Autowired
-	BCryptPasswordEncoder bcrypt;
-	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.userDetailsService(this.myUserService)
-			.passwordEncoder(bcrypt);
+			.passwordEncoder(passwordEncoder());
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-			.antMatchers(new String[]{"/","/home"}).permitAll()
-			.antMatchers("/login").permitAll()
-			.anyRequest().authenticated().and().csrf().disable().formLogin()//pero la home o el /
-			.loginPage("/login").failureForwardUrl("/login?error=true")
-			.defaultSuccessUrl("/home")
-			.usernameParameter("username")
-			.usernameParameter("password")
-			.and().logout()
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login").and().exceptionHandling()
-			.accessDeniedPage("/access-denied");
-		
+		http.
+	        authorizeRequests()
+	        .antMatchers("/").permitAll()
+	        .antMatchers("/login").permitAll()
+	        .anyRequest().authenticated().and().csrf().disable().formLogin()
+	        .loginPage("/login").failureUrl("/login?error=true")
+	        .defaultSuccessUrl("/home")
+	        .usernameParameter("username")
+	        .passwordParameter("password")
+	        .and().logout()
+	        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	        .logoutSuccessUrl("/login").and().exceptionHandling()
+	        .accessDeniedPage("/access-denied");
 		http.requiresChannel()
-			.requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null )//sin eso no andaba en heroku !!
+			.requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
 			.requiresSecure();
 	}
 	
@@ -59,7 +55,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
+		return new BCryptPasswordEncoder();
 	}
+	
+	/*
+	@Bean 
+	public MiPropiaClase miBean() {
+		return new MiBean(para11);
+	}*/
 }

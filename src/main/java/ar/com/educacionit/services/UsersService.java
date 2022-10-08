@@ -27,6 +27,10 @@ public class UsersService {
 	public Users buscarPorNombreDeUsuario(String username) {
 		return this.repository.findByUsername(username);
 	}
+
+	public void crear(Users user) {
+		this.repository.save(user);		
+	}
 	
 	
 }

@@ -1,0 +1,119 @@
+
+<!-- listar los cupones del sitio -->
+<!--namespaces-->
+<!DOCTYPE html>
+<html lang="es" 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaft.org">
+
+<head>
+	<!--incluir css-->
+	<link rel="stylesheet" 
+		type="text/css" 
+		media="all"
+		th:href="@{/css/site.css}" />
+	<script>
+		guardarId = (id) => {
+			alert(id);
+		}
+	</script>
+	<style>
+		.deleteLink {
+			text-decoration: underline;	
+			cursor:pointer;
+		}
+		
+		/*convertir los a en bloque*/
+		/*a {
+			display: inline-block;	
+			width: 50px;
+			height: 50px
+		}
+		p {
+			display: inline;
+		}*/
+		
+		.socio-container {
+			background-color: bisque;
+			display: flex;
+			flex-direction: column;/*row|column*/
+			justify-content: space-evenly;
+			align-items: center; /*default: strech*/
+			margin: 10px;
+			height: 400px;
+		}
+		
+		/*
+			selectores de hermanos
+			:first-child
+			:last-child
+			:nth-child(Kn)
+		*/
+		.table {
+			border: 0px solid black;
+			padding: 0px;
+			margin: 0px;
+			border-spacing: 0px;/*es tabla por eso */
+		}
+		
+		/*aplico al primero*/
+		.table tr:first-child {
+			background-color: red !important;
+		}
+		
+		/*aplico al ultimo hijo*/
+		.table tr:last-child {
+			color:white;
+			background-color: blue !important;
+		}
+		
+		.table tr:nth-child(3) {
+			background-color: aqua;
+		}
+		
+		/*puedo aplicar a pares e impares*/
+		.table tr:nth-child(even) {/*odd*/
+			background-color: cadetblue;
+		}
+		
+		.table tr:nth-child(odd) {
+			background-color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<p>hola soy un parrafo</p>
+	<a href="#">Soy un link</a>
+	<a href="#">Soy un link</a>
+	<a href="#">Soy un link</a>
+	<main>
+		<section class="socio-container">
+			<h1>Socios</h1>
+			<table class="table">
+				<!--titulos de la tabla-->
+				<tr>	
+					<th>ID</th>		
+					<th>NOMBRE</th>
+					<th>APELLIDO</th>
+					<th>CODIGO</th>
+					<th></th>			
+				</tr>
+				<!-- rows -->		
+				<tr th:each="socio : ${socios}">
+					<td th:text="${socio.id}"></td>
+					<td th:text="${socio.nombre}"></td>
+					<td th:text="${socio.apellido}"></td>
+					<td th:text="${socio.codigo}"></td>
+					<td>
+						<a th:href="@{'/socio/edit/' + ${socio.id}}">Edit</a>
+						<a class="deleteLink" th:attr="onclick='guardarId(' + ${socio.id} +')'">Eliminar</a>		
+					</td>			
+				</tr>
+			</table>
+			<img src="" alt="una imagen">
+		</section>
+	</main>
+</body>
+
+</html>
